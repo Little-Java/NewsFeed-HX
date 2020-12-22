@@ -1,0 +1,15 @@
+.page{
+    width:400px;
+    height: 710px;
+    display: inline-block;
+    vertical-align: top;
+    background:#E0FFFF;
+    position: relative;
+    font-size: 18px;
+    color: #fff;
+}
+.table{
+    width: calc(100% - 405px);
+    display: inline-block;
+    vertical-align: top;
+}

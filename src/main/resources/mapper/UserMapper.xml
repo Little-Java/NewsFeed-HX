@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hongxing.mapper.UserMapper">
+
+    <select id="selectUserByName" resultType="com.example.hongxing.entity.UserEntity">
+        select USID,USACCOUNTS,USNAME,RAWPASSWORD,OGINDEX from USERS
+        <where>
+            1=1
+            <if test="usAccounts !=null and usAccounts != ''">
+               AND USACCOUNTS = #{usAccounts}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUserById" resultType="com.example.hongxing.entity.UserEntity">
+        select USID,USACCOUNTS,USNAME,RAWPASSWORD,OGINDEX from USERS
+        <where>
+            1=1
+            <if test="usId !=null and usId != ''">
+                AND USID = #{usId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserList" resultType="com.example.hongxing.entity.UserEntity">
+        select
+            u.USID,
+            u.USACCOUNTS,
+            u.USNAME,
+            u.RAWPASSWORD,
+            u.OGINDEX,
+            o.*
+        from USERS u
+        left join ORGAN o on u.OGINDEX = o.OGINDEX
+        <where>
+            1=1
+            <if test="usId !=null and usId != ''">
+                AND u.USID = #{usId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hongxing.mapper.SubjectMapper">
+    
+    <select id="selectSubjectByIndex" resultType="com.example.hongxing.dto.SubjectDto">
+        select
+            SBID,
+            SBNAME
+        from SUBJECT
+        <where>
+            1=1
+            <if test="idsList !=null and idsList.size >0">
+                AND SBINDEX in
+                <foreach collection="idsList" item="idsList" index="index" open="(" separator="," close=")">
+                    #{idsList}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="querySubjectTree" resultType="com.example.hongxing.dto.TreeChidrenDto">
+        select
+            SBID AS "sbId",
+            SBNAME AS "sbName",
+            SBINDEX AS "sbIndex"
+        from SUBJECT
+        <where>
+            LENGTH(SBID) = 2
+        </where>
+        ORDER BY SBID ASC
+    </select>
+
+    <select id="getSubjectListById" resultType="com.example.hongxing.dto.TreeChidrenDto">
+        select
+            SBID AS "sbId",
+            SBNAME AS "sbName",
+            SBINDEX AS "sbIndex"
+        from SUBJECT
+        where
+            SBID LIKE #{sbId} || '%'
+            ORDER BY SBID ASC
+    </select>
+
+    <select id="querySubjectTrees" resultType="com.example.hongxing.dto.TreeChidrenDto">
+        select
+            SBID AS "sbId",
+            SBNAME AS "sbName",
+            SBINDEX AS "sbIndex"
+        from SUBJECT
+        where
+            LENGTH(SBID) = #{length}
+            and SBID LIKE #{sbId} || '%'
+            ORDER BY SBID ASC
+    </select>
+
+    <!--<resultMap type="LayuiTree" id="menuTreeMap">
+        <id column="SBID" property="id"/>
+        <result column="PARENT_ID" property="parent_id"/>
+        <result column="SBNAME" property="title"/>
+        <collection property="children" ofType="LayuiTree" column="MENU_ID" select="getMenuChildren"/>
+    </resultMap>-->
+
+    <!-- 先查询菜单根级目录 -->
+    <!-- 这里的返回结果必须为resultMap，并且值为上面构建的resultMap的id的值 -->
+    <!--<select id="findAllRecursion" resultMap="menuTreeMap">
+        SELECT SBID,PARENT_ID,SBNAME FROM SUBJECT  WHERE  SBID=0
+    </select>-->
+    <!-- 再利用上次查询结果colliection中column的值cid做递归查询，查出所有子菜单 -->
+    <!-- 这里的返回结果必须为resultMap，并且值为上面构建的resultMap的id的值 -->
+    <!--<select id="getMenuChildren" resultMap="menuTreeMap">
+        SELECT
+            *
+        FROM
+            SUBJECT
+        WHERE
+            parent_id= #{id}
+    </select>-->
+
+</mapper>
