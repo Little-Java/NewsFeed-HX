@@ -1,5 +1,6 @@
 package com.example.hongxing.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -9,14 +10,19 @@ import java.util.Date;
 @Data
 public class ArticleEntity {
 
+//    @TableField("ACID")
     private Integer acId;                   //sn_articleID
 
+//    @TableField("ACPRIMARYTITLE")
     private String acPrimaryTitle;          //主标题
 
+//    @TableField("ACVICETITLE")
     private String acViceTitle;             //副标题
 
+//    @TableField("ACISSUEDATE")
     private Date acIsSueDate;               //发布时间
 
+//    @TableField("ACTARGET")
     private String acTarget;                //打开位置 _self _blank
 
     private String acText;                  //内容
