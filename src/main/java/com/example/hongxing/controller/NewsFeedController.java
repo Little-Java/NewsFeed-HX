@@ -78,11 +78,11 @@ public class NewsFeedController {
 
             }
             // 任务存入到kafka消息队列中
-//            kafkaProducer.addMessage(kafkaDto);
-//            obsService.excute(articleDto);
+            kafkaProducer.addMessage(kafkaDto);
+            obsService.excute(articleDto);
         }else {
             // 任务存入到kafka消息队列中
-//            kafkaProducer.addMessage(kafkaDto);
+            kafkaProducer.addMessage(kafkaDto);
         }
 
         return new Result(200, "发送成功",kafkaDto);

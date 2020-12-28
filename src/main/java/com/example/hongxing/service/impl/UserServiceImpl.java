@@ -44,8 +44,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
 
     @Override
     public List<UserEntity> queryUserList() {
-        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        return userMapper.selectList(queryWrapper);
+        return userMapper.queryUserList();
     }
 
 

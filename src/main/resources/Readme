@@ -1,1 +1,5 @@
 kafka消息： start_kafka
+
+发布时修改 NewsFeedController 的属性specifiedPath
+修改pom.xml 剔除tomcat
+修改启动类 application
